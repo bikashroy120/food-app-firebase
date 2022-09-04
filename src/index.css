@@ -8,11 +8,20 @@ body {
 
 html,body{
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.exter_img{
+  width: 80%;
+  height: 650px;
+  margin-left: auto;
+  overflow: hidden
 }
 
 @tailwind base;

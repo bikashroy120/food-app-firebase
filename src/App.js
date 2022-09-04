@@ -13,15 +13,15 @@ function App() {
   return (
 
     <BrowserRouter>
-    <AnimatePresence>
+    <AnimatePresence exitBeforeEnter>
     <div className="w-screen h-auto flex flex-col bg-[#f5f3f3f3]">
         <Header />
-        <main className="mt-24 p-8 w-full">
+        <main className="mt-14 px-4 md:mt-20 md:px-16 py-4 w-full">
         
-        <Routes>
-            <Route path="/*" element={<MainContainer />} />
-            <Route path="/creactItem" element={<CreactContainer />} />
-        </Routes>
+            <Routes>
+                <Route path="/*" element={<MainContainer />} />
+                <Route path="/creactItem" element={<CreactContainer />} />
+            </Routes>
         </main>
     </div>
     </AnimatePresence>
