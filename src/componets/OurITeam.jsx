@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { FaShoppingBasket } from "react-icons/fa";
 import { motion } from "framer-motion";
+import ppp from "./img/p.png"
 
 const OurITeam = ({item,fleg,state}) => {
     const refContaier = useRef()
@@ -11,7 +12,7 @@ const OurITeam = ({item,fleg,state}) => {
 
   return (
     <div className={`flex items-center justify-center z-20 gap-3 ${fleg ? "overflow-x-scroll scrollbar-none" : "overflow-x-hidden flex-wrap"}`}>
-        {item && item.map((product)=>{
+        {item.length ?  item.map((product)=>{
             return(
                 <div ref={refContaier} className=' bg-slate-200 min-w-[300px] my-12 backdrop-blur-lg cursor-pointer rounded-2xl hover:drop-shadow-lg md:min-w-[315px]  z-20  p-3 ' key={product.id}>
                     <div className='flex items-center justify-between -pt-20'>
@@ -25,7 +26,10 @@ const OurITeam = ({item,fleg,state}) => {
                     </div>
                 </div>
             )
-        })}
+        }):(<div className='w-40 h-40'>
+            <img src={ppp} alt="" />
+        </div>)
+        }
     </div>
   )
 }
