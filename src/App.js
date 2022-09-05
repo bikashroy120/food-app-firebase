@@ -8,8 +8,30 @@ import './App.css'
 import MainContainer from "./componets/MainContainer";
 import CreactContainer from "./componets/CreactContainer";
 import {AnimatePresence} from 'framer-motion'
+import { useStateValue } from "./contex/stateProvider";
+import { getData } from "./componets/FirebaseFuncation";
+import { actionType } from "./contex/reducer";
+import { useEffect } from "react";
 
 function App() {
+
+  const [{ foodItems }, dispatch] = useStateValue();
+
+  
+  const factData = async ()=>{
+    await getData().then((data)=>{
+        dispatch({
+          type: actionType.SET_FOOD_ITEMS,
+          foodItems: data,
+        })
+
+    })
+  }
+
+  useEffect(()=>{
+    factData();
+  },[])
+
   return (
 
     <BrowserRouter>

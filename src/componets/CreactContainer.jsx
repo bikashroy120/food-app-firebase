@@ -4,9 +4,12 @@ import {category} from './Data'
 import Loder from './Loder';
 import { deleteObject , ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from '../firebaseConfig';
+import { getData, saveItem } from './FirebaseFuncation';
+import { actionType } from '../contex/reducer';
+import { useStateValue } from '../contex/stateProvider';
 
 const CreactContainer = () => {
-
+  const [{ foodItems }, dispatch] = useStateValue();
   const [title,setTitle]= useState("");
   const [calories,setcalories]= useState("");
   const [price,setprice]=useState('');
@@ -74,6 +77,68 @@ const CreactContainer = () => {
     });
   }
 
+
+  const updateProduct = ()=>{
+    try{
+        if(!title || !calories || !price || !imageAsset || !catagory){
+          setmsg("Please filld all Data: Try AGain")
+          setalertAtatus("danger")
+          setTimeout(() => {
+            setfields(false)
+            setisLodding(false)
+          }, 4000);
+        }else{
+          const data = {
+            id:`${Date.now()}`,
+            title:title,
+            imageUrl:imageAsset,
+            catagory:catagory,
+            calories:calories,
+            qty:1,
+            price:price,
+          }
+          saveItem(data)
+          setfields(true)
+          setisLodding(false)
+          setmsg("Product uploaded successfully")
+          clearData()
+          setTimeout(() => {
+            setfields(false)
+          }, 4000);
+        }
+    }catch (error){
+      console.log(error)
+      setfields(true)
+      setmsg("error while updatting data: Try AGain")
+      setalertAtatus("danger")
+      setTimeout(() => {
+        setfields(false)
+        setisLodding(false)
+      }, 4000);
+    }
+    factData()
+  }
+
+
+  const clearData=()=>{
+    setTitle("")
+    setcalories("")
+    setcatagory("")
+    setimageAsset(null)
+    setprice("")
+  }
+
+  const factData = async ()=>{
+    await getData().then((data)=>{
+        dispatch({
+          type: actionType.SET_FOOD_ITEMS,
+          foodItems: data,
+        })
+
+    })
+  }
+
+
   return (
     <div className='w-full min-h-screen flex items-center justify-center'>
         <div className='w-[90%] md:w-[75%] border border-gray-200 rounded-lg p-4 flex flex-col items-center justify-center gap-2'>
@@ -92,7 +157,7 @@ const CreactContainer = () => {
             </div>
 
             <div className='w-full'>
-                <select className='w-full outline-none border-none border-b-2 border-gray-600 py-2 bg-white text-gray-400'>
+                <select onChange={(e)=>setcatagory(e.target.value)} value={catagory} className='w-full outline-none border-none border-b-2 border-gray-600 py-2 bg-white text-gray-400'>
                   <option className=' text-gray-500 p-2' value="order">Secelect Categoey</option>
                   {category && category.map((item)=>{
                     return(
@@ -138,6 +203,10 @@ const CreactContainer = () => {
                   onChange={(e)=>setprice(e.target.value)}
                   className="w-full h-full bg-transparent text-lg font-semibold outline-none border-none text-gray-500"
                 />
+            </div>
+
+            <div>
+              <button onClick={updateProduct} className='py-2 px-10 text-gray rounded-xl my-2  bg-green-400 hover:bg-green-600 transition-all duration-300 ease-in-out '>Save</button>
             </div>
 
         </div>
