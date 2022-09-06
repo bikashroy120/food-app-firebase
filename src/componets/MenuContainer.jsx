@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {category} from './Data'
 import OurITeam from './OurITeam';
 
+
 const MenuContainer = ({foodItems}) => {
 
 const [FilterCat, setFilterCat] = useState("rice")
@@ -11,7 +12,7 @@ const [FilterCat, setFilterCat] = useState("rice")
 
 const filterData = foodItems && foodItems.filter((item)=>item.catagory===FilterCat)
 
-console.log(filterData)
+
 
 
   return (

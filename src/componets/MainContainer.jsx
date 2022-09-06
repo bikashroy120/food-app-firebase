@@ -5,10 +5,13 @@ import {IoIosArrowBack,IoIosArrowForward} from "react-icons/io"
 import { useStateValue } from '../contex/stateProvider';
 import OurITeam from './OurITeam';
 import MenuContainer from './MenuContainer';
+import CartContainer from './CartContainer';
+
 
 const MainContainer = () => {
     const [state, setstate] = useState(0)
-  const [{ foodItems }, dispatch] = useStateValue();
+    const [{ foodItems,cartShow },] = useStateValue();
+ 
   const filterItem = foodItems && foodItems.filter((item)=> item.catagory==='icecreams')
     useEffect(()=>{
 
@@ -37,6 +40,12 @@ const MainContainer = () => {
         <section className='w-full'>
             <MenuContainer foodItems={foodItems}/>
         </section>
+
+        <section className='w-full'>
+            {cartShow && <CartContainer />}
+        </section>
+
+
     </div>
   )
 }

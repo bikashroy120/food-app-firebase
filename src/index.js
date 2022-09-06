@@ -4,15 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StateProvider } from './contex/stateProvider';
+import { Provider } from "react-redux";
 import { initalState } from './contex/initalState';
 import reducer from './contex/reducer';
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <StateProvider initalState={initalState} reducer={reducer}>
-      <App />
-    </StateProvider>
+    <Provider store={store}>
+      <StateProvider initalState={initalState} reducer={reducer}>
+        <App />
+      </StateProvider>
+    </Provider>
   </React.StrictMode>
 );
 

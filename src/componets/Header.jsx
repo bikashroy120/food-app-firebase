@@ -9,9 +9,12 @@ import { useStateValue } from "../contex/stateProvider";
 import { actionType } from "../contex/reducer";
 import { GrAdd, GrLogout } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {cartActions} from '../store/Cart/cart-slice'
 
 const Header = () => {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user,cartShow }, dispatch] = useStateValue();
+  const cartItems = useSelector((state)=>state.cart.itemList);
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
@@ -41,6 +44,13 @@ const Header = () => {
     })
   }
 
+  const setShowCarts =()=>{
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: true,
+    });
+  }
+
   return (
     <div className="fixed w-screen bg-[#F5F4F4] z-50 p-3 px-6 md:p-6 md:px-16">
       {/* Destap Devices */}
@@ -57,10 +67,10 @@ const Header = () => {
           <li className=" text-sm font-normal cursor-pointer">Services</li>
         </motion.ul>
 
-        <div className="flex items-center justify-center relative">
+        <div className="flex items-center justify-center relative" onClick={setShowCarts}>
           <FaShoppingBasket className=" text-2xl cursor-pointer ml-4" />
           <p className="absolute -top-2 -right-2 bg-red-500 w-5 h-5 rounded-full text-xs flex items-center justify-center font-semibold text-white">
-            2
+            {cartItems.length}
           </p>
         </div>
 
@@ -92,10 +102,10 @@ const Header = () => {
       <div className="flex justify-between items-center md:hidden w-full h-full">
 
 
-      <div className="flex items-center justify-center relative">
+      <div className="flex items-center justify-center relative" onClick={setShowCarts}>
           <FaShoppingBasket className=" text-2xl cursor-pointer ml-4" />
           <p className="absolute -top-2 -right-2 bg-red-500 w-5 h-5 rounded-full text-xs flex items-center justify-center font-semibold text-white">
-            2
+            {cartItems.length}
           </p>
         </div>
 
