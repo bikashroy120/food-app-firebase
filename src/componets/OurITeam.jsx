@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { FaShoppingBasket } from "react-icons/fa";
 import { motion } from "framer-motion";
 import ppp from "./img/p.png"
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { cartActions } from '../store/Cart/cart-slice';
 
 const OurITeam = ({item,fleg,state}) => {
@@ -24,10 +24,12 @@ const OurITeam = ({item,fleg,state}) => {
         }));
       }
 
+      console.log(item)
+
 
   return (
-    <div className={`flex items-center justify-center z-20 gap-3 ${fleg ? "overflow-x-scroll scrollbar-none" : "overflow-x-hidden flex-wrap"}`}>
-        {item ?  item.map((product)=>{
+    <div className={`flex items-center justify-center z-20 gap-3 ${fleg ? "overflow-x-scroll" : "overflow-x-hidden flex-wrap"}`}>
+        {item && item.length !== 0 ?  item.map((product)=>{
             return(
                 <div ref={refContaier} className=' bg-slate-200 min-w-[300px] my-12 backdrop-blur-lg cursor-pointer rounded-2xl hover:drop-shadow-lg md:min-w-[315px]  z-20  p-3 ' key={product.id}>
                     <div className='flex items-center justify-between -pt-20'>
@@ -41,8 +43,9 @@ const OurITeam = ({item,fleg,state}) => {
                     </div>
                 </div>
             )
-        }):(<div className='w-40 h-40'>
-            <img src={ppp} alt="" />
+        }):(<div className='w-[300px] h-[300px] flex items-center justify-center flex-col'>
+            <img src={ppp} alt=""  className=''/>
+            <p>Product Not Avaleabale</p>
         </div>)
         }
     </div>

@@ -2,17 +2,17 @@ import React from 'react'
 import {TbArrowNarrowLeft} from "react-icons/tb"
 import {IoIosRemoveCircleOutline} from 'react-icons/io'
 import { motion } from "framer-motion";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CartItem from './CartItem';
 import { useStateValue } from '../contex/stateProvider';
 import { actionType } from '../contex/reducer';
 
 const CartContainer = () => {
-    const dispatch = useDispatch();
+   
     const cartItems = useSelector((state)=>state.cart.itemList);
     const subtotal = useSelector((state)=>state.cart.subtotal);
     
-    const [{cartShow },] = useStateValue();
+    const [{cartShow },dispatch] = useStateValue();
 
     const setShowCarts = ()=>{
         dispatch({
@@ -39,7 +39,7 @@ const CartContainer = () => {
         </div>
 
         <div className='w-full h-full bg-[#282A2C] rounded-t-[2rem]'>
-            <div className='h-[60vh] pt-7 px-5'>
+            <div className='h-[56vh] mt-7 px-5 overflow-y-scroll scrollbar-none'>
                 {cartItems && cartItems.map((item,index)=>{
                     return(
                         <CartItem item={item} key={index}/>    
