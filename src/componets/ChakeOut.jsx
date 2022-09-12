@@ -93,6 +93,7 @@ const ChakeOut = () => {
           toast.error("add all Data .....")
         }else{
           const data = {
+            id:`${Date.now()}`,
             name:name,
             email:email,
             phone:phone,
@@ -102,6 +103,8 @@ const ChakeOut = () => {
             address:address,
             item:cartItems,
             user:user,
+            orderStates:"pandding",
+            total:subtotal,
           }
           OrderCreact(data)
           toast.success('Successfully Order!')

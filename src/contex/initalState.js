@@ -6,4 +6,5 @@ export const initalState = {
     user:userInfo,
     foodItems:null,
     cartShow:false,
+    orderItems:null,
 }

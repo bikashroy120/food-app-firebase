@@ -9,16 +9,17 @@ import MainContainer from "./componets/MainContainer";
 import CreactContainer from "./componets/CreactContainer";
 import {AnimatePresence} from 'framer-motion'
 import { useStateValue } from "./contex/stateProvider";
-import { getData } from "./componets/FirebaseFuncation";
+import { getData, getOrder } from "./componets/FirebaseFuncation";
 import { actionType } from "./contex/reducer";
 import { useEffect } from "react";
 import ChakeOut from "./componets/ChakeOut";
 import { Toaster } from "react-hot-toast";
 import OrderPage from "./componets/OrderPage";
+import Profile from "./componets/Profile";
 
 function App() {
 
-  const [{ foodItems }, dispatch] = useStateValue();
+  const [{ foodItems,orderItems }, dispatch] = useStateValue();
 
   
   const factData = async ()=>{
@@ -31,9 +32,24 @@ function App() {
     })
   }
 
+  const factOrder = async ()=>{
+    await getOrder().then((data)=>{
+        dispatch({
+          type: actionType.SET_ORDER_ITEMS,
+          orderItems: data,
+        })
+
+    })
+  }
+
   useEffect(()=>{
     factData();
   },[])
+
+  useEffect(()=>{
+    factOrder();
+  },[])
+
 
   return (
 
@@ -48,6 +64,7 @@ function App() {
                 <Route path="/*" element={<MainContainer />} />
                 <Route path="/creactItem" element={<CreactContainer />} />
                 <Route path="/chackout" element={<ChakeOut />} />
+                <Route path="/profile" element={<Profile />}/>
                 <Route path="/order" element={<OrderPage />}/>
             </Routes>
         </main>

@@ -89,6 +89,10 @@ const Header = () => {
                 Creact Item
                 <GrAdd className="pl-1" />
               </p></Link>
+              <Link to='/profile'><p className=" px-4 py-2 cursor-pointer flex items-center font-normal hover:bg-slate-100 transition-all duration-100 ease-in-out text-base" onClick={()=>setMount(false)}>
+                Profile
+                <GrAdd className="pl-1" />
+              </p></Link>
               <p className=" px-4 py-2 cursor-pointer flex items-center font-normal hover:bg-slate-100 transition-all duration-100 ease-in-out text-base" onClick={logOut}>
                 Log Out
                 <GrLogout className="pl-1" />
