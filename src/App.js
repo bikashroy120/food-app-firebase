@@ -16,11 +16,13 @@ import ChakeOut from "./componets/ChakeOut";
 import { Toaster } from "react-hot-toast";
 import OrderPage from "./componets/OrderPage";
 import Profile from "./componets/Profile";
+import {useDispatch} from 'react-redux'
+import { factOrder } from "./store/Order/order-actions";
 
 function App() {
 
   const [{ foodItems,orderItems }, dispatch] = useStateValue();
-
+const dis = useDispatch()
   
   const factData = async ()=>{
     await getData().then((data)=>{
@@ -32,23 +34,27 @@ function App() {
     })
   }
 
-  const factOrder = async ()=>{
-    await getOrder().then((data)=>{
-        dispatch({
-          type: actionType.SET_ORDER_ITEMS,
-          orderItems: data,
-        })
+  // const factOrder = async ()=>{
+  //   await getOrder().then((data)=>{
+  //       dispatch({
+  //         type: actionType.SET_ORDER_ITEMS,
+  //         orderItems: data,
+  //       })
 
-    })
-  }
+  //   })
+  // }
+
+  useEffect(()=>{
+    dis(factOrder())
+  },[dis])
 
   useEffect(()=>{
     factData();
   },[])
 
-  useEffect(()=>{
-    factOrder();
-  },[])
+  // useEffect(()=>{
+  //   factOrder();
+  // },[])
 
 
   return (
