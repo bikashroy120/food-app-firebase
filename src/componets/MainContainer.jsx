@@ -10,8 +10,8 @@ import CartContainer from './CartContainer';
 
 const MainContainer = () => {
     const [state, setstate] = useState(0)
-    const [{ foodItems,cartShow },] = useStateValue();
- 
+    const [{ foodItems,cartShow},] = useStateValue();
+
   const filterItem = foodItems && foodItems.filter((item)=> item.catagory==='icecreams')
     useEffect(()=>{
 

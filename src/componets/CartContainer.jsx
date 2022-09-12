@@ -6,19 +6,35 @@ import { useSelector } from 'react-redux';
 import CartItem from './CartItem';
 import { useStateValue } from '../contex/stateProvider';
 import { actionType } from '../contex/reducer';
+import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 const CartContainer = () => {
+
+    const navigiate = useNavigate();
    
     const cartItems = useSelector((state)=>state.cart.itemList);
     const subtotal = useSelector((state)=>state.cart.subtotal);
     
-    const [{cartShow },dispatch] = useStateValue();
+    const [{cartShow,user },dispatch] = useStateValue();
 
     const setShowCarts = ()=>{
         dispatch({
             type: actionType.SET_CART_SHOW,
             cartShow: false,
           });
+    }
+
+    const ChackoutPage = ()=>{
+        if(!user){
+            toast.error("Plages Log in First ..")
+        }else{
+            navigiate('/chackout')
+            dispatch({
+                type: actionType.SET_CART_SHOW,
+                cartShow: false,
+              });
+        }
     }
 
 
@@ -67,7 +83,7 @@ const CartContainer = () => {
                         <h3>$ {subtotal ? subtotal+3 : 0}</h3>
                     </div>
                     <div className='flex items-center justify-center'>
-                        <motion.button whileTap={{scale: 0.9}} className='py-2 px-10 bg-orange-500 text-white rounded-2xl hover:drop-shadow-2xl'>Check Out</motion.button>
+                        <motion.button whileTap={{scale: 0.9}} onClick={ChackoutPage} className='py-2 px-10 bg-orange-500 text-white rounded-2xl hover:drop-shadow-2xl'>Check Out</motion.button>
                     </div>
                 </div>
             </div>

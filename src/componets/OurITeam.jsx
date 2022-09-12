@@ -20,11 +20,9 @@ const OurITeam = ({item,fleg,state}) => {
             id:product.id,
             productname: product.title,
             feature_image: product.imageUrl,
-            price:product.price,
+            price:Number(product.price),
         }));
       }
-
-      console.log(item)
 
 
   return (

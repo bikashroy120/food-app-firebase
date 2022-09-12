@@ -7,10 +7,24 @@ export const saveItem = async(data)=>{
     })
 }
 
+export const OrderCreact = async(data)=>{
+    await setDoc(doc(firestore,"orderItem",`${Date.now()}`),data,{
+        merge:true
+    })
+}
+
 
 export const getData = async ()=>{
     const items = await getDocs(
         query(collection(firestore,"foodItem",), orderBy("id","desc"))
+    );
+    return items.docs.map((doc)=> doc.data())
+}
+
+
+export const getOrder = async ()=>{
+    const items = await getDocs(
+        query(collection(firestore,"orderItem",), orderBy("id","desc"))
     );
     return items.docs.map((doc)=> doc.data())
 }

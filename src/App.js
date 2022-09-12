@@ -12,6 +12,9 @@ import { useStateValue } from "./contex/stateProvider";
 import { getData } from "./componets/FirebaseFuncation";
 import { actionType } from "./contex/reducer";
 import { useEffect } from "react";
+import ChakeOut from "./componets/ChakeOut";
+import { Toaster } from "react-hot-toast";
+import OrderPage from "./componets/OrderPage";
 
 function App() {
 
@@ -38,11 +41,14 @@ function App() {
     <AnimatePresence exitBeforeEnter>
     <div className="w-screen h-auto flex flex-col bg-[#f5f3f3f3]">
         <Header />
+        <Toaster />
         <main className="mt-14 px-4 md:mt-20 md:px-16 py-4 w-full">
         
             <Routes>
                 <Route path="/*" element={<MainContainer />} />
                 <Route path="/creactItem" element={<CreactContainer />} />
+                <Route path="/chackout" element={<ChakeOut />} />
+                <Route path="/order" element={<OrderPage />}/>
             </Routes>
         </main>
     </div>
