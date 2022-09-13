@@ -1,25 +1,19 @@
 import React, { useState,useEffect } from 'react'
 
 const UserRight = ({orderItems,user}) => {
-  console.log(orderItems)
+ 
     const [Order, setOrder] = useState([])
+    const [States,setStates] = useState()
     const filterData = orderItems && orderItems.filter((item)=>item.user.uid=== user.uid)
     useEffect(() => {
-      setOrder(filterData)
-    }, [])
-
-
-  const Pandding = ()=>{
-    const filterorg = filterData.filter((item)=>item.orderStates==="pandding")
-    setOrder(filterorg)
-  }
-
-  const Completed = ()=>{
-    const filterorg = filterData.filter((item)=>item.orderStates==="Completed")
-    setOrder(filterorg)
-  }
-
-  console.log(Order)
+      if(!States){
+        const filterorg = filterData.filter((item)=>item.orderStates === "pandding")
+        setOrder(filterorg)
+      }else{
+        const filterorg = filterData.filter((item)=>item.orderStates === States)
+        setOrder(filterorg)
+      }
+    },[States])
 
   return (
     <div className=''>
@@ -29,16 +23,16 @@ const UserRight = ({orderItems,user}) => {
         </div>
 
         <div className='flex items-center justify-center gap-3 mt-5 mb-5'>
-            <button onClick={Pandding} className=' bg-orange-400 text-white py-2 px-10 rounded-md hover:bg-red-500'>Pandding</button>
-            <button onClick={Completed} className=' bg-orange-400 text-white py-2 px-10 rounded-md hover:bg-red-500'>Completed</button>
+            <button onClick={()=>setStates("pandding")} className=' bg-orange-400 text-white py-2 px-10 rounded-md hover:bg-red-500'>Pandding</button>
+            <button onClick={()=>setStates("Completed")} className=' bg-orange-400 text-white py-2 px-10 rounded-md hover:bg-red-500'>Completed</button>
         </div>
 
     <div className='w-full h-full'>
     <div className=''>
             {
-                Order.length ? orderItems.map((ite)=> {
+                Order.length ? Order.map((ite,ind)=> {
                   return(
-                    <div className=' bg-slate-200 p-5 flex flex-col gap-1 mb-4'>
+                    <div key={ind} className=' bg-slate-200 p-5 flex flex-col gap-1 mb-4'>
                       <h2>Order Id : {ite.id}</h2>
                       <h2>Total : {ite.total}</h2>
                       {ite.item.map((ord,index)=>{

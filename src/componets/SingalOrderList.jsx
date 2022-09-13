@@ -1,20 +1,23 @@
 import React,{useEffect,useState} from 'react'
 import { BsArrowLeft } from 'react-icons/bs'
 import { useNavigate,useParams } from 'react-router-dom';
-import { collection, doc, getDocs, orderBy, query, setDoc,where } from "firebase/firestore"; 
+import { collection, doc, getDocs, query ,updateDoc,where } from "firebase/firestore"; 
 import {firestore} from '../firebaseConfig'
+import { toast } from 'react-hot-toast';
+import {useDispatch} from 'react-redux'
+import { factOrder } from '../store/Order/order-actions';
 
 const SingalOrderList = () => {
-
+ 
   const [Data, setData] = useState()
+  const [orderStates,setorderStates] = useState()
   const navigiate = useNavigate();
   const params = useParams()
   const Addmin = ()=>{
     navigiate('/addmin/orderlist')
   }
-
-  console.log(params.orderId)
-
+  console.log(orderStates)
+  const dispatch = useDispatch()
   useEffect(() => {
     const getQuery = async ()=>{
       const items = await getDocs(
@@ -25,7 +28,21 @@ const SingalOrderList = () => {
   getQuery()
   }, [])
 
-  console.log(Data)
+
+  const updateData = (id) => {
+    const dostoupdate = doc(firestore, "orderItem", id);
+    updateDoc(dostoupdate, {
+      orderStates: orderStates,
+    })
+      .then(() => {
+        toast.success('Successfully Update')
+        dispatch(factOrder())
+      })
+      .catch((err) => {
+        toast.error(err.msg)
+        console.log(err)
+      });
+  };
 
   return (
     <div className='h-[85vh]'>
@@ -46,7 +63,29 @@ const SingalOrderList = () => {
                     <h2>Total Price :{item.total}</h2>
 
                     <div>
-                        
+                        <div className="flex items-start flex-col w-full gap-1 mt-5">
+                            <label htmlFor="city" className="">
+                              Update States<span>*</span>
+                            </label>
+                            <select
+                              name="city"
+                              id="city"
+                              value={orderStates}
+                              className='w-full border border-gray-400 bg-transparent rounded-lg outline-none p-1 '
+                              onChange={(e)=>setorderStates(e.target.value)}
+                            >
+                              <option value="pandding">
+                              Pandding
+                              </option>
+                              <option value="Completed">
+                              Completed
+                              </option>
+                            </select>
+                        </div>
+
+                        <div className='mt-5'>
+                          <button onClick={()=>updateData(item.id)} className='py-2 px-8 bg-orange-400 rounded-md text-white'>Update</button>
+                        </div>
                     </div>
                   </div>
                   <div>

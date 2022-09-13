@@ -1,17 +1,19 @@
 import React,{useState} from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from "framer-motion";
 import { toast } from 'react-hot-toast';
 import { useStateValue } from '../contex/stateProvider';
 import { getOrder, OrderCreact } from './FirebaseFuncation';
 import { useNavigate } from "react-router-dom";
+import { serverTimestamp } from 'firebase/firestore';
+import { factOrder } from '../store/Order/order-actions';
 
 const ChakeOut = () => {
   const navigiate = useNavigate();
   const [{user },] = useStateValue();
     const cartItems = useSelector((state)=>state.cart.itemList);
     const subtotal = useSelector((state)=>state.cart.subtotal);
-
+    const dis = useDispatch()
     const [name, setname] = useState();
     const [email, setemail] = useState();
     const [phone, setphone] = useState();
@@ -105,10 +107,12 @@ const ChakeOut = () => {
             user:user,
             orderStates:"pandding",
             total:subtotal,
+            timeState:serverTimestamp(),
           }
           OrderCreact(data)
           toast.success('Successfully Order!')
           navigiate("/order")
+          dis(factOrder())
         }
       }
       

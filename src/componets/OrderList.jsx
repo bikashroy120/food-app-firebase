@@ -2,8 +2,16 @@ import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import { useSelector } from 'react-redux';
+import { deleteDoc } from 'firebase/firestore';
+import { doc } from "firebase/firestore"; 
+import {firestore} from '../firebaseConfig'
+import {useDispatch} from 'react-redux'
+import { factOrder } from '../store/Order/order-actions';
+import toast from 'react-hot-toast';
+
 
 const OrderList = () => {
+    const dispatch = useDispatch()
     const Items = useSelector((state)=>state.order.Items);
     const navigiate = useNavigate();
     const Addmin = ()=>{
@@ -13,6 +21,15 @@ const OrderList = () => {
     const SingalView = (id)=>{
         navigiate(`/addmin/orderlist/${id}`)
     }
+
+    const deleteItem = (id) => {
+        deleteDoc(doc(firestore, "orderItem", id))
+          .then((res) => {
+            toast.error("Successfully Delect")
+            dispatch(factOrder())
+          })
+          .catch((err) => toast.error(err.meg));
+      };
 
   return (
     <div className='w-full h-full'>
@@ -32,7 +49,7 @@ const OrderList = () => {
                         <h2>Order Item :{item.item.length}</h2>
                         <h2>Total Price :{item.total}</h2>
                         <button onClick={()=>SingalView(item.id)} className="py-2 px-8 bg-orange-400 text-white rounded-md">View</button>
-                        <button className='py-2 px-8 bg-red-400 text-white rounded-md'>Delect</button>
+                        <button onClick={()=>deleteItem(item.id)} className='py-2 px-8 bg-red-400 text-white rounded-md'>Delect</button>
                     </div>
                 )
             })}
