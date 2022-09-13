@@ -18,6 +18,9 @@ import OrderPage from "./componets/OrderPage";
 import Profile from "./componets/Profile";
 import {useDispatch} from 'react-redux'
 import { factOrder } from "./store/Order/order-actions";
+import Addmin from "./componets/Addmin";
+import OrderList from "./componets/OrderList";
+import SingalOrderList from "./componets/SingalOrderList";
 
 function App() {
 
@@ -34,16 +37,6 @@ const dis = useDispatch()
     })
   }
 
-  // const factOrder = async ()=>{
-  //   await getOrder().then((data)=>{
-  //       dispatch({
-  //         type: actionType.SET_ORDER_ITEMS,
-  //         orderItems: data,
-  //       })
-
-  //   })
-  // }
-
   useEffect(()=>{
     dis(factOrder())
   },[dis])
@@ -51,10 +44,6 @@ const dis = useDispatch()
   useEffect(()=>{
     factData();
   },[])
-
-  // useEffect(()=>{
-  //   factOrder();
-  // },[])
 
 
   return (
@@ -68,7 +57,11 @@ const dis = useDispatch()
         
             <Routes>
                 <Route path="/*" element={<MainContainer />} />
-                <Route path="/creactItem" element={<CreactContainer />} />
+                <Route path="/addmin" element={<Addmin />} >
+                </Route>
+                <Route path="/addmin/creact" element={<CreactContainer />}/>
+                <Route path="/addmin/orderlist" element={<OrderList />}/>
+                <Route path="/addmin/orderlist/:orderId" element={<SingalOrderList />} />
                 <Route path="/chackout" element={<ChakeOut />} />
                 <Route path="/profile" element={<Profile />}/>
                 <Route path="/order" element={<OrderPage />}/>

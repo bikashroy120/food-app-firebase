@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, orderBy, query, setDoc } from "firebase/firestore"; 
+import { collection, doc, getDocs, orderBy, query, setDoc,where } from "firebase/firestore"; 
 import {firestore} from '../firebaseConfig'
 
 export const saveItem = async(data)=>{
@@ -13,7 +13,7 @@ export const OrderCreact = async(data)=>{
     })
 }
 
-
+// 1662980169246
 export const getData = async ()=>{
     const items = await getDocs(
         query(collection(firestore,"foodItem",), orderBy("id","desc"))
@@ -25,6 +25,13 @@ export const getData = async ()=>{
 export const getOrder = async ()=>{
     const items = await getDocs(
         query(collection(firestore,"orderItem",), orderBy("id","desc"))
+    );
+    return items.docs.map((doc)=> doc.data())
+}
+
+export const getQuery = async ()=>{
+    const items = await getDocs(
+        query(collection(firestore,"orderItem",),where("id", "===", "1662980169246"), orderBy("id","desc"))
     );
     return items.docs.map((doc)=> doc.data())
 }

@@ -33,7 +33,8 @@ const UserRight = ({orderItems,user}) => {
             <button onClick={Completed} className=' bg-orange-400 text-white py-2 px-10 rounded-md hover:bg-red-500'>Completed</button>
         </div>
 
-        <div className=' overflow-y-scroll'>
+    <div className='w-full h-full'>
+    <div className=''>
             {
                 Order.length ? orderItems.map((ite)=> {
                   return(
@@ -57,6 +58,8 @@ const UserRight = ({orderItems,user}) => {
                 </div>)
              }
         </div>
+    </div>
+
     </div>
   )
 }

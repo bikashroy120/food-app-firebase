@@ -1,4 +1,4 @@
-import { getOrder } from "../../componets/FirebaseFuncation";
+import { getOrder,getQuery } from "../../componets/FirebaseFuncation";
 import { orderActions } from "./order-slice";
 
 
@@ -15,6 +15,14 @@ export const factOrder = ()=>{
   }
 
 
+
+  export const getQuer = ()=>{
+    return async (dispatch) => {
+    await getQuery().then((data)=>{
+        dispatch(orderActions.queryItems(data))
+    })
+    }
+  }
 
 // user order list
 // export const orderlist = (address) => {
