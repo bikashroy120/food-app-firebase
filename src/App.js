@@ -21,6 +21,7 @@ import { factOrder } from "./store/Order/order-actions";
 import Addmin from "./componets/Addmin";
 import OrderList from "./componets/OrderList";
 import SingalOrderList from "./componets/SingalOrderList";
+import ToDayOrder from "./componets/ToDayOrder";
 
 function App() {
 
@@ -61,6 +62,7 @@ const dis = useDispatch()
                 </Route>
                 <Route path="/addmin/creact" element={<CreactContainer />}/>
                 <Route path="/addmin/orderlist" element={<OrderList />}/>
+                <Route path="/addmin/todayorderlist" element={<ToDayOrder />}/>
                 <Route path="/addmin/orderlist/:orderId" element={<SingalOrderList />} />
                 <Route path="/chackout" element={<ChakeOut />} />
                 <Route path="/profile" element={<Profile />}/>
