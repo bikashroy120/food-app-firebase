@@ -109,7 +109,7 @@ const CreactContainer = () => {
           catagory: catagory,
           calories: calories,
           qty: 1,
-          price: price,
+          price: Number(price),
         };
         saveItem(data);
         setfields(true);

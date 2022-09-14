@@ -47,10 +47,13 @@ const Addmin = () => {
 
 
   useEffect(() => {
-    const ttt = Data && Data.reduce((total,value)=>{
-           return total.total + value.total
-    })
+    const fff = Data && Data.map((item)=> item.total)
+    const ttt = fff && fff.reduce((tot,value)=>{
+      return tot + value;
+})
     settoday(ttt)
+    console.log(fff)
+    console.log(Data)
   }, [Data])
 
   const RoDaySeles = () => {
