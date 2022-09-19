@@ -35,3 +35,10 @@ export const getQuery = async ()=>{
     );
     return items.docs.map((doc)=> doc.data())
 }
+
+export const getUser = async (id)=>{
+    const items = await getDocs(
+        query(collection(firestore,"user",),where("uid", "==", id), orderBy("id","desc"))
+    );
+    return items.docs.map((doc)=> doc.data())
+}

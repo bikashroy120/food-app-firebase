@@ -22,6 +22,8 @@ import Addmin from "./componets/Addmin";
 import OrderList from "./componets/OrderList";
 import SingalOrderList from "./componets/SingalOrderList";
 import ToDayOrder from "./componets/ToDayOrder";
+import Login from "./componets/Login";
+import Regester from "./componets/Regester";
 
 function App() {
 
@@ -60,6 +62,8 @@ const dis = useDispatch()
                 <Route path="/*" element={<MainContainer />} />
                 <Route path="/addmin" element={<Addmin />} >
                 </Route>
+                <Route path="/login" element={<Login />}/>
+                <Route path="/singup" element={<Regester />}/>
                 <Route path="/addmin/creact" element={<CreactContainer />}/>
                 <Route path="/addmin/orderlist" element={<OrderList />}/>
                 <Route path="/addmin/todayorderlist" element={<ToDayOrder />}/>
