@@ -6,6 +6,9 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { firestore, storage } from "../firebaseConfig";
 import { doc, updateDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
+import Loder from "./Loder";
+import { useDispatch } from "react-redux";
+import { getUserData } from "../store/Order/order-actions";
 
 const ProfileModal = ({ setShow, user }) => {
   const [name, setname] = useState("");
@@ -15,7 +18,8 @@ const ProfileModal = ({ setShow, user }) => {
   const [gender, setgender] = useState("");
   const [barthday, setbarthday] = useState("");
   const [profile, setProfile] = useState();
-  const [lodding, setLodding] = useState();
+  const [lodding, setLodding] = useState(false);
+  const dispatch = useDispatch()
 
   const HandelSubmit = async (e) => {
     e.preventDefault();
@@ -28,39 +32,68 @@ const ProfileModal = ({ setShow, user }) => {
     ) {
       toast.error("Please Fills all Data.");
     } else {
-      setLodding(true);
+      
       try {
-
-        const storageRef = ref(storage, `images/${Date.now()}-${profile.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, profile);
-
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("Upload is " + progress + "% done");
-          },
-          (error) => {},
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then(
-              async (downloadURL) => {
-                const dostoupdate = doc(firestore, "user", user[0]?.uid);
-                updateDoc(dostoupdate, {
-                  address: address,
-                  country: contry,
-                  photoURL: downloadURL,
-                  dathBarth: barthday,
-                  displayName:name,
-                  gender:gender,
-                  phone:phone,
-                })
-                  .then((res) => alert("data update"))
-                  .catch((err) => alert(err.message));
-              }
-            );
-          }
-        );
+        if(profile){
+          setLodding(true);
+          const storageRef = ref(storage, `images/${Date.now()}-${profile.name}`);
+          const uploadTask = uploadBytesResumable(storageRef, profile);
+  
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log("Upload is " + progress + "% done");
+            },
+            (error) => {},
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then(
+                async (downloadURL) => {
+                  const dostoupdate = doc(firestore, "user", user[0]?.uid);
+                  updateDoc(dostoupdate, {
+                    address: address,
+                    country: contry,
+                    photoURL: downloadURL,
+                    dathBarth: barthday,
+                    displayName:name,
+                    gender:gender,
+                    phone:phone,
+                  })
+                    .then((res) =>  {
+                     console.log(res)
+                    })
+                    .catch((err) =>{
+                      toast.error((err.message))
+                    });
+  
+                    toast.success('Successfully Profile update!')
+                    setLodding(false);
+                    setShow(false)
+                    dispatch(getUserData(user[0]?.uid))
+                }
+              );
+            }
+          );
+        }else{
+             setLodding(true);
+            const dostoupdate = doc(firestore, "user", user[0]?.uid);
+            updateDoc(dostoupdate, {
+              address: address,
+              country: contry,
+              dathBarth: barthday,
+              displayName:name,
+              gender:gender,
+              phone:phone,
+            })
+              .then((res) => {
+                toast.success('Successfully Profile update!')
+                setLodding(false);
+                setShow(false)
+                dispatch(getUserData(user[0]?.uid))
+              })
+              .catch((err) => alert(err.message));
+          };
       } catch (err) {
         console.log(err);
       }
@@ -75,6 +108,7 @@ const ProfileModal = ({ setShow, user }) => {
       setcontry(user[0]?.country)
       setgender(user[0]?.gender)
       setbarthday(user[0]?.dathBarth)
+      // setProfile(user[0]?.photoURL)
     };
     updatettt()
   }, [])
@@ -101,7 +135,7 @@ const ProfileModal = ({ setShow, user }) => {
 
         <div className="px-10">
           <div className="flex items-center justify-center flex-col py-2">
-            <img src={avater} alt="" className="w-36 h-36 rounded-full" />
+            <img src={profile ?  URL.createObjectURL(profile) : user[0]?.photoURL || avater} alt="" className="w-36 h-36 rounded-full" />
             <input
               type="file"
               id="add"
@@ -170,7 +204,7 @@ const ProfileModal = ({ setShow, user }) => {
                 className="py-2 px-4 bg-green-500 text-white rounded-xl hover:bg-green-800 translate-x-0 duration-300"
                 type="submit"
               >
-                Update Profile
+                {lodding ? <Loder /> : "Update Profile"}
               </button>
             </div>
           </form>

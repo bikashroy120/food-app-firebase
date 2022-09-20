@@ -64,8 +64,8 @@ const ToDayOrder = () => {
             {Data && Data.map((item,index)=>{
                 return(
                     <div key={index} className='flex items-center justify-between mb-2'>
-                        <img src={item.user.photoURL} alt="" className='w-20 h-20 rounded-full' />
-                        <h2>{item.user.displayName}</h2>
+                        <img src={item.user[0]?.photoURL} alt="" className='w-20 h-20 rounded-full' />
+                        <h2>{item.user[0]?.displayName}</h2>
                         <h2>Order States: {item.orderStates}</h2>
                         <h2>Order Item :{item.item.length}</h2>
                         <h2>Total Price :{item.total}</h2>

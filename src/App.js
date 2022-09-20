@@ -18,15 +18,16 @@ import OrderPage from "./componets/OrderPage";
 import Profile from "./componets/Profile";
 import {useDispatch} from 'react-redux'
 import { factOrder } from "./store/Order/order-actions";
+import {getUserData} from "./store/Order/order-actions"
 import Addmin from "./componets/Addmin";
 import OrderList from "./componets/OrderList";
 import SingalOrderList from "./componets/SingalOrderList";
 import ToDayOrder from "./componets/ToDayOrder";
 import Login from "./componets/Login";
 import Regester from "./componets/Regester";
-import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
-import { firestore } from "./firebaseConfig";
-import { orderActions } from "./store/Order/order-slice";
+// import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
+// import { firestore } from "./firebaseConfig";
+// import { orderActions } from "./store/Order/order-slice";
 
 
 function App() {
@@ -45,16 +46,7 @@ const dis = useDispatch()
   }
 
   useEffect(()=>{
-   const getData= async ()=>{
-    const items = await getDocs(
-      query(
-        collection(firestore, "user"),
-        where("uid", "==", user[0]?.uid),
-      )
-    );
-    dis(orderActions.usersItems(items.docs.map((doc) => doc.data())));
-   }
-    getData()
+    dis(getUserData(user[0]?.uid))
   },[])
 
  

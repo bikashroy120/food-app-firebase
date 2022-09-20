@@ -13,6 +13,7 @@ const ChakeOut = () => {
   const [{user },] = useStateValue();
     const cartItems = useSelector((state)=>state.cart.itemList);
     const subtotal = useSelector((state)=>state.cart.subtotal);
+    const Users = useSelector((state)=>state.order.Users);
     const dis = useDispatch()
     const [name, setname] = useState();
     const [email, setemail] = useState();
@@ -95,7 +96,7 @@ const ChakeOut = () => {
           toast.error("add all Data .....")
         }else{
           const data = {
-            id:`${Date.now()}`,
+            
             name:name,
             email:email,
             phone:phone,
@@ -104,7 +105,7 @@ const ChakeOut = () => {
             post_code:post_code,
             address:address,
             item:cartItems,
-            user:user,
+            user:Users,
             orderStates:"pandding",
             total:subtotal,
             timeState:serverTimestamp(),
