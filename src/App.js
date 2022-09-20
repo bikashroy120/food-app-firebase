@@ -24,12 +24,16 @@ import SingalOrderList from "./componets/SingalOrderList";
 import ToDayOrder from "./componets/ToDayOrder";
 import Login from "./componets/Login";
 import Regester from "./componets/Regester";
+import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
+import { firestore } from "./firebaseConfig";
+import { orderActions } from "./store/Order/order-slice";
+
 
 function App() {
 
-  const [{ foodItems,orderItems }, dispatch] = useStateValue();
+  const [{ foodItems,orderItems,user }, dispatch] = useStateValue();
+  console.log(user)
 const dis = useDispatch()
-  
   const factData = async ()=>{
     await getData().then((data)=>{
         dispatch({
@@ -39,6 +43,21 @@ const dis = useDispatch()
 
     })
   }
+
+  useEffect(()=>{
+   const getData= async ()=>{
+    const items = await getDocs(
+      query(
+        collection(firestore, "user"),
+        where("uid", "==", user[0]?.uid),
+      )
+    );
+    dis(orderActions.usersItems(items.docs.map((doc) => doc.data())));
+   }
+    getData()
+  },[])
+
+ 
 
   useEffect(()=>{
     dis(factOrder())

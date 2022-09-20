@@ -3,7 +3,7 @@ import logo from "../componets/img/logo.png";
 import { FaShoppingBasket } from "react-icons/fa";
 import avater from "../componets/img/avatar.png";
 import { motion } from "framer-motion";
-
+import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../contex/stateProvider";
 import { actionType } from "../contex/reducer";
 import { GrAdd, GrLogout } from "react-icons/gr";
@@ -14,25 +14,15 @@ import {cartActions} from '../store/Cart/cart-slice'
 const Header = () => {
   const [{ user,cartShow }, dispatch] = useStateValue();
   const cartItems = useSelector((state)=>state.cart.itemList);
+  const Users = useSelector((state)=>state.order.Users);
 
-
+const navigate =  useNavigate()
 
   const [isMount, setMount] = useState(false);
 
-  // const login = async () => {
-  //   if (!user) {
-  //     const {
-  //       user: { refreshToken, providerData },
-  //     } = await signInWithPopup(firebaseAuth, provider);
-  //     dispatch({
-  //       type: actionType.SET_USER,
-  //       user: providerData[0],
-  //     });
-  //     localStorage.setItem("user", JSON.stringify(providerData[0]));
-  //   } else {
-  //     setMount(!isMount);
-  //   }
-  // };
+  const login = async () => {
+      setMount(!isMount);
+  };
 
   const logOut=()=>{
     setMount(false)
@@ -41,6 +31,9 @@ const Header = () => {
       type: actionType.SET_USER,
       user:null,
     })
+
+    navigate("/")
+    
   }
 
   const setShowCarts =()=>{
@@ -70,11 +63,12 @@ const Header = () => {
           <motion.img
             whileTap={{ scale: 0.6 }}
             className="w-8 min-w-[40px] h-8 min-h-[40px] cursor-pointer ml-5 drop-shadow-xl rounded-full"
-            src={user ? avater : avater}
+            src={user ? (Users[0]?.photoURL ? Users[0]?.photoURL: avater)  : avater}
             alt=""
+            onClick={login}
           />
 
-          {/* {isMount && (
+          {isMount && (
             <motion.div initial={{opacity:0,scale:0.6}} animate={{opacity:1,scale:1}} exit={{opacity:0,scale:0.6}} className="w-40 absolute shadow-xl bg-gray-50 top-12 right-0">
               <Link to='/addmin'><p className=" px-4 py-2 cursor-pointer flex items-center font-normal hover:bg-slate-100 transition-all duration-100 ease-in-out text-base" onClick={()=>setMount(false)}>
                 Creact Item
@@ -89,7 +83,7 @@ const Header = () => {
                 <GrLogout className="pl-1" />
               </p>
             </motion.div>
-          )} */}
+          )}
         </div>
           
           : <>

@@ -6,12 +6,13 @@ import { collection, doc, getDocs, orderBy, query, setDoc,where } from "firebase
 import {firestore} from '../firebaseConfig'
 import { useStateValue } from "../contex/stateProvider";
 import { actionType } from "../contex/reducer";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
   const [state, setstate] = useState(false);
   const [{ user,cartShow }, dispatch] = useStateValue();
-
+  const navigate = useNavigate()
 
   const HandelSubmit = async (e)=>{
     e.preventDefault()
@@ -23,15 +24,19 @@ const Login = () => {
         // Signed in 
         const user = userCredential.user;
         console.log(user)
-        const getQuery = async ()=>{
+        const getQuery = async (id)=>{
           const items = await getDocs(
-              query(collection(firestore,"user"),where("uid", "==", "YzOaTrYgEBgwI1staevQeX3eC5w2"))
+              query(collection(firestore,"user"),where("uid", "==", id))
           );
+
+          const data = items.docs.map((doc)=> doc.data())
+          console.log(data)
           dispatch({
             type: actionType.SET_USER,
             user: items.docs.map((doc)=> doc.data()),
           });
-          localStorage.setItem("user", JSON.stringify(items.docs.map((doc)=> doc.data())));
+          localStorage.setItem("user", JSON.stringify(data));
+          navigate("/")
       }
 
       getQuery(user.uid)

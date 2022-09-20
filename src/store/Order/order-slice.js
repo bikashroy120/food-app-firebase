@@ -4,7 +4,8 @@ const orderSlice = createSlice({
     name:'order',
     initialState:{
         Items:[],
-        Query:[]
+        Query:[],
+        Users:[],
     },
     reducers:{
         orderItems(state,action){
@@ -14,6 +15,10 @@ const orderSlice = createSlice({
             state.Query = action.payload;
         },
        
+
+        usersItems(state,action){
+            state.Users = action.payload;
+        },
     }
 });
 export const orderActions = orderSlice.actions;
