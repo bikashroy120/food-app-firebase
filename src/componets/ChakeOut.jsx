@@ -96,7 +96,7 @@ const ChakeOut = () => {
           toast.error("add all Data .....")
         }else{
           const data = {
-            
+            uid:Date.now(),
             name:name,
             email:email,
             phone:phone,

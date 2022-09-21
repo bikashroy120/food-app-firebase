@@ -7,13 +7,15 @@ import {firestore} from '../firebaseConfig'
 import { useStateValue } from "../contex/stateProvider";
 import { actionType } from "../contex/reducer";
 import { useNavigate } from "react-router-dom";
+import { getUserData } from "../store/Order/order-actions";
+import { useDispatch } from "react-redux";
 
 
 const Login = () => {
   const [state, setstate] = useState(false);
   const [{ user,cartShow }, dispatch] = useStateValue();
   const navigate = useNavigate()
-
+  const dis  = useDispatch()
   const HandelSubmit = async (e)=>{
     e.preventDefault()
     const email = e.target[0].value;
@@ -23,20 +25,20 @@ const Login = () => {
       .then( async (userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user)
+        
         const getQuery = async (id)=>{
           const items = await getDocs(
               query(collection(firestore,"user"),where("uid", "==", id))
           );
 
           const data = items.docs.map((doc)=> doc.data())
-          console.log(data)
           dispatch({
             type: actionType.SET_USER,
             user: items.docs.map((doc)=> doc.data()),
           });
           localStorage.setItem("user", JSON.stringify(data));
           navigate("/")
+          dis(getUserData(user.uid))
       }
 
       getQuery(user.uid)

@@ -48,7 +48,7 @@ const OrderList = () => {
                         <h2>Order States: {item.orderStates}</h2>
                         <h2>Order Item :{item.item.length}</h2>
                         <h2>Total Price :{item.total}</h2>
-                        <button onClick={()=>SingalView(item.id)} className="py-2 px-8 bg-orange-400 text-white rounded-md">View</button>
+                        <button onClick={()=>SingalView(item.uid)} className="py-2 px-8 bg-orange-400 text-white rounded-md">View</button>
                         <button onClick={()=>deleteItem(item.id)} className='py-2 px-8 bg-red-400 text-white rounded-md'>Delect</button>
                     </div>
                 )

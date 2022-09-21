@@ -13,6 +13,8 @@ const SingalOrderList = () => {
   const [orderStates,setorderStates] = useState()
   const navigiate = useNavigate();
   const params = useParams()
+
+  console.log(params)
   const Addmin = ()=>{
     navigiate('/addmin/orderlist')
   }
@@ -21,14 +23,16 @@ const SingalOrderList = () => {
   useEffect(() => {
     const getQuery = async ()=>{
       const items = await getDocs(
-          query(collection(firestore,"orderItem"),where("id", "==", params.orderId))
+          query(collection(firestore,"orderItem"),where("uid", "==", Number(params.orderId)))
       );
-      setData(items.docs.map((doc)=> doc.data())) 
+      setData(items.docs.map((doc)=> {
+          return {...doc.data(),id:doc.id}
+      })) 
   }
-  getQuery()
+  getQuery();
   }, [])
 
-
+  console.log(Data)
   const updateData = async (id) => {
     const dostoupdate = doc(firestore, "orderItem", id);
     await updateDoc(dostoupdate, {

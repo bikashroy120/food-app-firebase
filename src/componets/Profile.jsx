@@ -10,7 +10,7 @@ const Profile = () => {
     const [{user}] = useStateValue();
     const Items = useSelector((state)=>state.order.Items);
     const Users = useSelector((state)=>state.order.Users);
-    console.log(Users)
+    
   return (
     <div className='flex items-start justify-start h-[85vh] gap-4'>
         <div className='flex-1 md:w-[30%]'>

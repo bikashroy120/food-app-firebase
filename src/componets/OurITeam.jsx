@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { FaShoppingBasket } from "react-icons/fa";
 import { motion } from "framer-motion";
-import ppp from "./img/p.png"
+import ppp from "./img/NotFound.svg"
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../store/Cart/cart-slice';
 
@@ -41,9 +41,9 @@ const OurITeam = ({item,fleg,state}) => {
                     </div>
                 </div>
             )
-        }):(<div className='w-[300px] h-[300px] flex items-center justify-center flex-col'>
+        }):(<div className='w-[400px] h-[400px] flex items-center justify-center flex-col'>
             <img src={ppp} alt=""  className=''/>
-            <p>Product Not Avaleabale</p>
+            <p className='mt-3'>Product Not Avaleabale</p>
         </div>)
         }
     </div>

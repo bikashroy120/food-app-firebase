@@ -1,21 +1,34 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { async } from "@firebase/util";
+import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
 import { getOrder,getQuery } from "../../componets/FirebaseFuncation";
 import { firestore } from "../../firebaseConfig";
 import { orderActions } from "./order-slice";
+
 
 
 // check coupon 
 
  
 
-export const factOrder = ()=>{
-    return async (dispatch) => {
-    await getOrder().then((data)=>{
-        dispatch(orderActions.orderItems(data))
-    })
+// export const factOrder = ()=>{
+//     return async (dispatch) => {
+//     await getOrder().then((data)=>{
+//         dispatch(orderActions.orderItems(data))
+//     })
+//     }
+//   }
+
+
+  export const factOrder = ()=>{
+   const collectionref = collection(firestore, "orderItem");
+    return async (dispatch)=>{
+       onSnapshot(collectionref, (data) => {
+          dispatch(orderActions.orderItems(data.docs.map((item) => {
+            return { ...item.data(), id: item.id };
+          })))
+      });
     }
   }
-
 
 
   export const getQuer = ()=>{

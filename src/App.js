@@ -46,7 +46,9 @@ const dis = useDispatch()
   }
 
   useEffect(()=>{
-    dis(getUserData(user[0]?.uid))
+    if(user){
+      dis(getUserData(user[0]?.uid))
+    }
   },[])
 
  
