@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { firestore } from "../firebaseConfig";
 import {HiPlusSm,HiMinusSm} from 'react-icons/hi'
 
@@ -26,8 +26,6 @@ const ProductDeteles = () => {
     getQuery();
   }, []);
 
-  console.log(Data);
-
   return (
     <div className="main mt-7">
       <div className="flex items-start justify-between gap-8 flex-wrap">
@@ -47,11 +45,17 @@ const ProductDeteles = () => {
                 repellat ut tempore, dolore numquam nostrum vitae. Itaque, dolores!
                 Laboriosam, repudiandae?
             </p>
-            <h3 className="text-[20px] font-normal mt-5">Catagory : {Data && Data[0]?.catagory}</h3>
-            <div className="flex items-center justify-center w-[150px] h-10  border border-red-400 rounded-xl">
-                <button>< HiPlusSm /></button>
-                <h2>2</h2>
-                <button><HiMinusSm/></button>
+            <h3 className="text-[20px] font-normal mt-5">Price : <span className=" text-red-500">$ {Data && Data[0]?.price}</span></h3>
+            <h3 className="text-[20px] font-normal mt-2">Catagory : {Data && Data[0]?.catagory}</h3>
+            <h3 className="text-[20px] font-normal mt-2">Calories : <span className=" text-red-500">{Data && Data[0]?.calories}</span></h3>
+            <div className="flex items-center justify-between w-[120px] h-10 overflow-hidden  border border-red-400 rounded-xl mt-5">
+                <button className="text-[25px] p-2 hover:bg-red-400 hover:text-white duration-300 transition-all"><HiMinusSm/></button>
+                <h2 className="border  border-l-red-400  border-r-red-400 w-[50px] h-full flex items-center justify-center">2</h2>
+                <button className="text-[25px] p-2 hover:bg-red-400 hover:text-white duration-300 transition-all">< HiPlusSm/></button>
+            </div>
+
+            <div className="mt-5">
+              <button className="py-3 text-[20px] rounded-2xl hover:bg-red-700 duration-300 transition-all px-10  bg-red-500 text-white">Add to card</button>
             </div>
             </div>
         </div>
