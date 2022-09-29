@@ -25,6 +25,7 @@ import SingalOrderList from "./componets/SingalOrderList";
 import ToDayOrder from "./componets/ToDayOrder";
 import Login from "./componets/Login";
 import Regester from "./componets/Regester";
+import ProductDeteles from "./componets/ProductDeteles";
 // import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
 // import { firestore } from "./firebaseConfig";
 // import { orderActions } from "./store/Order/order-slice";
@@ -81,6 +82,7 @@ const dis = useDispatch()
                 <Route path="/addmin/orderlist" element={<OrderList />}/>
                 <Route path="/addmin/todayorderlist" element={<ToDayOrder />}/>
                 <Route path="/addmin/orderlist/:orderId" element={<SingalOrderList />} />
+                <Route path="/product/:productid" element={<ProductDeteles />} />
                 <Route path="/chackout" element={<ChakeOut />} />
                 <Route path="/profile" element={<Profile />}/>
                 <Route path="/order" element={<OrderPage />}/>
