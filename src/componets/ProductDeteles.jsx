@@ -3,9 +3,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { firestore } from "../firebaseConfig";
 import {HiPlusSm,HiMinusSm} from 'react-icons/hi'
+import { useDispatch } from 'react-redux';
+import { cartActions } from "../store/Cart/cart-slice";
+import DitielsSlyder from "./DitielsSlyder";
 
 const ProductDeteles = () => {
   const [Data, setData] = useState();
+  const [slyderItem,setslyderItem] = useState();
+  const [cartitem,setcartitem] = useState(1)
+  const disp = useDispatch()
   // const navigiate = useNavigate();
   const params = useParams();
 
@@ -24,7 +30,49 @@ const ProductDeteles = () => {
       );
     };
     getQuery();
+  }, [params]);
+
+  useEffect(() => {
+    const getQuery = async () => {
+      const items = await getDocs(
+        query(
+          collection(firestore, "foodItem"),
+          where("catagory", "==", "icecreams")
+        )
+      );
+      setslyderItem(
+        items.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        })
+      );
+    };
+    getQuery();
   }, []);
+
+  const increment = ()=>{
+    setcartitem(cartitem+1)
+  }
+
+  const decrement = ()=>{
+    if(cartitem===1){
+      setcartitem(1)
+    }else{
+      setcartitem(cartitem-1)
+    }
+  }
+
+  const addToCart = (product) =>{
+
+    disp(cartActions.addToCart({
+        id:Data && Data[0]?.id,
+        productname: Data && Data[0]?.title,
+        feature_image: Data && Data[0]?.imageUrl,
+        price:Number(Data[0]?.price),
+        qut:cartitem,
+    }));
+  }
+
+  console.log(Data)
 
   return (
     <div className="main mt-7">
@@ -49,16 +97,20 @@ const ProductDeteles = () => {
             <h3 className="text-[20px] font-normal mt-2">Catagory : {Data && Data[0]?.catagory}</h3>
             <h3 className="text-[20px] font-normal mt-2">Calories : <span className=" text-red-500">{Data && Data[0]?.calories}</span></h3>
             <div className="flex items-center justify-between w-[120px] h-10 overflow-hidden  border border-red-400 rounded-xl mt-5">
-                <button className="text-[25px] p-2 hover:bg-red-400 hover:text-white duration-300 transition-all"><HiMinusSm/></button>
-                <h2 className="border  border-l-red-400  border-r-red-400 w-[50px] h-full flex items-center justify-center">2</h2>
-                <button className="text-[25px] p-2 hover:bg-red-400 hover:text-white duration-300 transition-all">< HiPlusSm/></button>
+                <button className="text-[25px] p-2 hover:bg-red-400 hover:text-white duration-300 transition-all" onClick={decrement}><HiMinusSm/></button>
+                <h2 className="border  border-l-red-400  border-r-red-400 w-[50px] h-full flex items-center justify-center">{cartitem}</h2>
+                <button className="text-[25px] p-2 hover:bg-red-400 hover:text-white duration-300 transition-all" onClick={increment}>< HiPlusSm/></button>
             </div>
 
             <div className="mt-5">
-              <button className="py-3 text-[20px] rounded-2xl hover:bg-red-700 duration-300 transition-all px-10  bg-red-500 text-white">Add to card</button>
+              <button onClick={addToCart} className="py-3 text-[20px] rounded-2xl hover:bg-red-700 duration-300 transition-all px-10  bg-red-500 text-white">Add to card</button>
             </div>
             </div>
         </div>
+      </div>
+
+      <div className=" mt-[100px]">
+        <DitielsSlyder slyderItem={slyderItem}/>
       </div>
     </div>
   );

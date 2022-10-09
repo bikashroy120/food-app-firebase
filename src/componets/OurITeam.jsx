@@ -23,6 +23,7 @@ const OurITeam = ({item,fleg,state}) => {
             productname: product.title,
             feature_image: product.imageUrl,
             price:Number(product.price),
+            qut:1,
         }));
       }
 

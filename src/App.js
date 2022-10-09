@@ -26,14 +26,16 @@ import ToDayOrder from "./componets/ToDayOrder";
 import Login from "./componets/Login";
 import Regester from "./componets/Regester";
 import ProductDeteles from "./componets/ProductDeteles";
+import CartContainer from "./componets/CartContainer";
 // import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
 // import { firestore } from "./firebaseConfig";
 // import { orderActions } from "./store/Order/order-slice";
 
 
 function App() {
+  
 
-  const [{ foodItems,orderItems,user }, dispatch] = useStateValue();
+  const [{ foodItems,orderItems,user,cartShow }, dispatch] = useStateValue();
   console.log(user)
 const dis = useDispatch()
   const factData = async ()=>{
@@ -70,6 +72,7 @@ const dis = useDispatch()
     <div className="w-screen h-auto flex flex-col bg-[#f5f3f3f3]">
         <Header />
         <Toaster />
+          {cartShow && <CartContainer />}
         <main className="mt-14 px-4 md:mt-20 md:px-16 py-4 w-full">
         
             <Routes>
