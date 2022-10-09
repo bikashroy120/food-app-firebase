@@ -27,6 +27,7 @@ import Login from "./componets/Login";
 import Regester from "./componets/Regester";
 import ProductDeteles from "./componets/ProductDeteles";
 import CartContainer from "./componets/CartContainer";
+
 // import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
 // import { firestore } from "./firebaseConfig";
 // import { orderActions } from "./store/Order/order-slice";

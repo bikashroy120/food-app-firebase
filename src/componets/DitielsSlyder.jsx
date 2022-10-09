@@ -7,28 +7,25 @@ import { useDispatch } from 'react-redux';
 import { cartActions } from '../store/Cart/cart-slice';
 import { useNavigate } from 'react-router-dom';
 import { FaShoppingBasket } from 'react-icons/fa';
+import {MdKeyboardArrowLeft,MdKeyboardArrowRight} from 'react-icons/md'
 
 
 
 function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
+    const { onClick} = props;
     return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "red" }}
-        onClick={onClick}
-      />
+      <div onClick={onClick} className={` text-[30px] text-red-500 bg-white absolute top-[50%] translate-y-[-50%] right-[-30px] w-8 flex items-center justify-center cursor-pointer rounded-lg shadow-lg `}>
+        <MdKeyboardArrowRight />
+        </div>
     );
   }
   
   function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
+    const { onClick } = props;
     return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "green" }}
-        onClick={onClick}
-      />
+        <div onClick={onClick} className={` text-[30px] text-red-500 bg-white absolute top-[50%] translate-y-[-50%] z-10 left-[-30px] w-8 flex items-center justify-center cursor-pointer rounded-lg shadow-lg `}>
+        <MdKeyboardArrowLeft />
+        </div>
     );
   }
 
@@ -89,7 +86,7 @@ const DitielsSlyder = ({slyderItem}) => {
       };
   return (
     <div>
-    <h2> Responsive </h2>
+    <h2 className='text-[25px]'> Just for you </h2>
     <Slider {...settings}>
       {slyderItem && slyderItem.map((item,index)=>{
         return(
