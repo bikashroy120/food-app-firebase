@@ -15,7 +15,7 @@ const ProductDeteles = () => {
   const disp = useDispatch();
   // const navigiate = useNavigate();
   const params = useParams();
-  const [lodding, setlodding] = useState(true);
+  const [lodding, setlodding] = useState(false);
 
   useEffect(() => {
     setlodding(true);
@@ -31,7 +31,7 @@ const ProductDeteles = () => {
           return { ...doc.data(), id: doc.id };
         })
       );
-      // setlodding(false);
+      setlodding(false);
     };
     getQuery();
   }, [params]);
@@ -77,36 +77,34 @@ const ProductDeteles = () => {
     );
   };
 
-  console.log(lodding);
 
   return (
     <div className="main mt-7">
       {lodding ? (
-        <div>
+        <div className="flex items-start justify-start w-[900px] mx-auto">
           <ContentLoader
-            height={240}
             speed={1}
             backgroundColor={"#333"}
             foregroundColor={"#999"}
-            viewBox="0 0 380 70"
+            viewBox="0 0 380 250"
           >
             {/* Only SVG shapes */}
-            <rect x="0" y="0" rx="5" ry="5" width="70" height="70" />
+            <rect x="0" y="0" rx="5" ry="5" width="320" height="170" />
           </ContentLoader>
           <ContentLoader
-            height={240}
-            speed={1}
+            speed={2}
             backgroundColor={"#333"}
             foregroundColor={"#999"}
-            viewBox="0 0 380 70"
+            viewBox="0 0 380 250"
           >
             {/* Only SVG shapes */}
-            <rect x="80" y="17" rx="4" ry="4" width="300" height="13" />
-            <rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
-            <rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
-            <rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
-            <rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
-            <rect x="80" y="40" rx="3" ry="3" width="250" height="10" />
+            <rect x="105" y={1 * 20 + 20} rx="5" ry="5" width="250" height="12" />
+            <rect x="105" y={2 * 20 + 20} rx="5" ry="5" width="250" height="12" />
+            <rect x="105" y={3 * 20 + 20} rx="5" ry="5" width="250" height="12" />
+            <rect x="105" y={4 * 20 + 20} rx="5" ry="5" width="250" height="12" />
+            <rect x="105" y={5 * 20 + 20} rx="5" ry="5" width="250" height="12" />
+            <rect x="105" y={6 * 20 + 20} rx="5" ry="5" width="250" height="12" />
+            <rect x="105" y={7 * 20 + 20} rx="5" ry="5" width="250" height="12" />
           </ContentLoader>
         </div>
       ) : (
