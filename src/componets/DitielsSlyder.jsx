@@ -47,7 +47,7 @@ const DitielsSlyder = ({slyderItem}) => {
       const PageNatiom = (id)=>{
         navigiate(`/product/${id}`)
       }
-    console.log(slyderItem)
+
     var settings = {
         dots: false,
         infinite: false,
@@ -86,7 +86,6 @@ const DitielsSlyder = ({slyderItem}) => {
       };
   return (
     <div>
-    <h2 className='text-[25px]'> Just for you </h2>
     <Slider {...settings}>
       {slyderItem && slyderItem.map((item,index)=>{
         return(

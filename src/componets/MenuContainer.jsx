@@ -22,7 +22,7 @@ const filterData = foodItems && foodItems.filter((item)=>item.catagory===FilterC
               <span className=' bg-red-600 w-40 h-1 rounded-2xl'></span>
             </div>
 
-            <div className='flex items-center justify-center gap-4 my-10'>
+            {/* <div className='flex items-center justify-center gap-4 my-10'>
                 {category && category.map((item,index)=>{
                   return(
                     <motion.div whileTap={{scale: 0.9 }} key={index} className={`${FilterCat === item.urlPrameName ? "bg-red-600" :"bg-white"} group w-20 h-24 flex items-center justify-center flex-col  shadow-2xl cursor-pointer rounded-2xl hover:bg-red-600`} onClick={()=>setFilterCat(item.urlPrameName)}>
@@ -33,10 +33,10 @@ const filterData = foodItems && foodItems.filter((item)=>item.catagory===FilterC
                     </motion.div>
                   )
                 })}
-            </div>
+            </div> */}
 
             <div>
-            <OurITeam fleg={false} item={filterData} />
+            <OurITeam fleg={false} item={foodItems} />
             </div>
 
     </div>
