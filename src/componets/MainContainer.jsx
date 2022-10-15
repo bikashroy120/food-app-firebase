@@ -7,6 +7,7 @@ import OurITeam from './OurITeam';
 import MenuContainer from './MenuContainer';
 import CatagoryComponent from './CatagoryComponent';
 import DitielsSlyder from './DitielsSlyder';
+import FlashSelse from './flashSelse/FlashSelse';
 
 
 
@@ -15,15 +16,17 @@ const MainContainer = () => {
     const [{ foodItems},] = useStateValue();
 
   const filterItem = foodItems && foodItems.filter((item)=> item.catagory==='icecreams')
+  console.log(foodItems)
     useEffect(()=>{
 
     },[setstate])
   return (
     <div className='w-full h-auto container'> 
         <HeroContainer />
+        <FlashSelse slyderItem={filterItem}/>
         <CatagoryComponent />
 
-        <section className='w-full pt-14'>
+        <section className='w-full pt-10'>
             <div className='flex items-center justify-between'>
                 <div className='flex-1 flex items-start justify-start flex-col'>
                 <h3 className=' text-[1.5rem] text-gray-700 font-normal'>Our Fresh & Healthy Foods</h3>
@@ -43,8 +46,11 @@ const MainContainer = () => {
             </div> */}
         </section>
 
-        <section className='w-full'>
+        <section className='w-full mt-10'>
             <MenuContainer foodItems={foodItems}/>
+            <div className='w-full flex items-center justify-center mt-5'>
+                <button className=' bg-orange-400 hover:bg-orange-600 text-white px-4 py-2 rounded-md'>See More</button>
+            </div>
         </section>
 
     </div>

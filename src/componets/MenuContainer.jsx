@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import {MdFastfood} from 'react-icons/md'
-import { motion } from "framer-motion";
-import {category} from './Data'
+// import {MdFastfood} from 'react-icons/md'
+// import { motion } from "framer-motion";
+// import {category} from './Data'
 import OurITeam from './OurITeam';
 
 
 const MenuContainer = ({foodItems}) => {
 
-const [FilterCat, setFilterCat] = useState("rice")
+// const [FilterCat, setFilterCat] = useState("rice")
 
 
-const filterData = foodItems && foodItems.filter((item)=>item.catagory===FilterCat)
+// const filterData = foodItems && foodItems.filter((item)=>item.catagory===FilterCat)
 
 
 
