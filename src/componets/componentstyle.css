@@ -1,0 +1,19 @@
+.cart{
+    transition: 0.5s ease;
+    
+}
+
+.cartImg{
+    transition: 0.9s ease;
+}
+
+.cart:hover{
+    box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.61);
+    -webkit-box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.61);
+    -moz-box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.61);
+}
+
+
+.cart:hover .cartImg{
+    transform: scale(1.5);
+}

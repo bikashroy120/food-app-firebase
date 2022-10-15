@@ -18,8 +18,7 @@ const filterData = foodItems && foodItems.filter((item)=>item.catagory===FilterC
   return (
     <div>
          <div className='flex items-start justify-start flex-col'>
-              <h3 className=' text-[2.5rem] text-gray-700 font-normal'>Our Hot Dishes</h3>
-              <span className=' bg-red-600 w-40 h-1 rounded-2xl'></span>
+              <h3 className=' text-[1.5rem] text-gray-700 font-normal'>Our Hot Dishes</h3>
             </div>
 
             {/* <div className='flex items-center justify-center gap-4 my-10'>
