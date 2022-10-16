@@ -28,6 +28,7 @@ import Regester from "./componets/Regester";
 import ProductDeteles from "./componets/ProductDeteles";
 import CartContainer from "./componets/CartContainer";
 import Footer from "./componets/Footer";
+import Catagory from "./componets/catagory/Catagory";
 
 // import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
 // import { firestore } from "./firebaseConfig";
@@ -83,6 +84,7 @@ const dis = useDispatch()
                 </Route>
                 <Route path="/login" element={<Login />}/>
                 <Route path="/singup" element={<Regester />}/>
+                <Route path="/category" element={<Catagory />}/>
                 <Route path="/addmin/creact" element={<CreactContainer />}/>
                 <Route path="/addmin/orderlist" element={<OrderList />}/>
                 <Route path="/addmin/todayorderlist" element={<ToDayOrder />}/>

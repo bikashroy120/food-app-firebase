@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../componets/img/logo.png";
 import {
-  FaFacebookF,
-  FaInstagram,
-  FaYoutube,
   FaPhoneAlt,
 } from "react-icons/fa";
 import { GrAppleAppStore, GrGooglePlay } from "react-icons/gr";
@@ -87,12 +84,12 @@ const Footer = () => {
             </div>
             <div className="fcontent">
               <div className="social">
-                <a href="">
+              
                   <GrAppleAppStore />
-                </a>
-                <a href="">
+              
+               
                   <GrGooglePlay />
-                </a>
+               
               </div>
             </div>
           </div>
