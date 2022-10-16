@@ -44,9 +44,9 @@ const navigate =  useNavigate()
   }
 
   return (
-    <div className="fixed w-screen bg-[#F5F4F4] z-50 p-3 px-6 md:p-6 md:px-16">
+    <div className="fixed w-screen bg-[#F5F4F4] z-50  p-3 px-6 md:p-6 md:px-16">
       {/* Destap Devices */}
-      <div className="hidden md:flex w-full h-full">
+      <div className="hidden md:flex w-full h-full container">
         <Link to="/" className=" flex items-center gap-2">
           <img src={logo} className="w-8 object-cover" alt="" />
           <p className=" text-xl font-bold">city</p>

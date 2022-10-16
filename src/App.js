@@ -27,6 +27,7 @@ import Login from "./componets/Login";
 import Regester from "./componets/Regester";
 import ProductDeteles from "./componets/ProductDeteles";
 import CartContainer from "./componets/CartContainer";
+import Footer from "./componets/Footer";
 
 // import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
 // import { firestore } from "./firebaseConfig";
@@ -92,6 +93,7 @@ const dis = useDispatch()
                 <Route path="/order" element={<OrderPage />}/>
             </Routes>
         </main>
+        <Footer />
     </div>
     </AnimatePresence>
     </BrowserRouter>
