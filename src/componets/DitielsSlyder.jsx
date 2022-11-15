@@ -63,21 +63,21 @@ const DitielsSlyder = ({slyderItem}) => {
           {
             breakpoint: 1200,
             settings: {
-              slidesToShow: 5,
+              slidesToShow: 4,
               slidesToScroll: 1,
             }
           },
           {
             breakpoint: 1024,
             settings: {
-              slidesToShow: 4,
+              slidesToShow: 3,
               slidesToScroll: 1,
             }
           },
           {
             breakpoint: 768,
             settings: {
-              slidesToShow: 3,
+              slidesToShow: 2,
               slidesToScroll: 1
             }
           }
@@ -97,6 +97,14 @@ const DitielsSlyder = ({slyderItem}) => {
               slidesToScroll: 1
             }
           }
+          ,
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1
+            }
+          }
         ]
       };
   return (
@@ -105,13 +113,13 @@ const DitielsSlyder = ({slyderItem}) => {
       {slyderItem && slyderItem.map((product,index)=>{
         return(
           
-          <div key={index}>
-            <div onClick={() => PageNatiom(product.id)}  className=" bg-white max-w-[235px] h-[320px] cart shadow hover:cursor-pointer hover:shadow-md"> 
+          <div key={index} className="my-2 w-full">
+            <div onClick={() => PageNatiom(product.id)}  className=" bg-white max-w-[95%] md:w-auto h-[320px] md:h-auto cart shadow hover:cursor-pointer hover:shadow-md"> 
                 <div className="w-full h-[180px] overflow-hidden flex items-center justify-center">
                   <img src={product.imageUrl}alt="" className="w-[150px] h-[150px] object-contain cartImg" />
                 </div>
-                <div className="px-5">
-                <h4 className=" font-[500] mb-3">{product.title} M10 TWS Ear 9D Stereo.....</h4>
+                <div className="px-5 sm:px-3">
+                <h4 className=" font-[500] text-sm sm:text-[18px] mb-1 sm:mb-3">{product.title} M10 TWS Ear 9D Stereo.....</h4>
                 <h3>Price: <span className=" text-red-400">৳{product.price}</span></h3>
                 <Rating name="read-only" value={4} readOnly />
                 {/* <div className="flex items-center justify-between">
