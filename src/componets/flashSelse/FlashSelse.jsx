@@ -25,9 +25,9 @@ const FlashSelse = ({slyderItem}) => {
   return (
     <div>
         <div className='flex items-center gap-3'>
-            <h2 className="m-0 text-[1.5rem]">Flash Deals</h2>
+            <h2 className="m-0 text-[0.9rem] md:text-[1.5rem]">Flash Deals</h2>
             <div className=''>
-              <span>Ending in</span>
+              <span className='text-[]0.7rem md:text-[1rem]'>Ending in</span>
               <Countdown date={Date.now() + 10000000} renderer={renderer} />
             </div>
         </div>

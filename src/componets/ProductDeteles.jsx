@@ -108,7 +108,7 @@ const ProductDeteles = () => {
           </ContentLoader>
         </div>
       ) : (
-        <div className="flex items-start justify-between gap-8 flex-wrap">
+        <div className="flex items-start justify-between gap-8 ">
           <div className=" flex-1 flex items-end md:justify-end justify-center">
             <div className="w-[300px] md:w-[450px] sm:w-[350px] bg-red-500 h-[450px] rounded-md">
               <img

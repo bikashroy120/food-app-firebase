@@ -36,7 +36,7 @@ const OurITeam = ({ item, state }) => {
 
   return (
     <div
-      className={`flex items-center justify-center z-20 gap-3 py-2 flex-wrap`}
+      className={`grid items-center grid-cols-2 md:grid-cols-3 sm:gap-5 lg:flex justify-center z-20 gap-1 py-2 flex-wrap`}
     >
       {item && item.length !== 0 ? (
         item.slice(0,15).map((product) => {
@@ -69,7 +69,7 @@ const OurITeam = ({ item, state }) => {
             //   </div>
             // </div>
 
-            <div className=" bg-white w-[230px] h-[350px] cart shadow  hover:shadow-md"> 
+            <div className=" bg-white h-auto md:w-[250px] w-auto xl:w-[220px] xl:h-[350px] cart shadow  hover:shadow-md"> 
                 <div onClick={() => PageNatiom(product.id)} className="w-full cursor-pointer h-[180px] overflow-hidden flex items-center justify-center">
                   <img src={product.imageUrl}alt=""  className="w-[150px] h-[150px] object-contain cartImg" />
                 </div>
@@ -77,7 +77,7 @@ const OurITeam = ({ item, state }) => {
                 <h4 className=" font-[500] mb-3">{product.title} M105 TWS Earph 9D Stereo.....</h4>
                 <h3>Price: <span className=" text-red-400">৳{product.price}</span></h3>
                 <Rating name="read-only" value={4} readOnly />
-                <div className="flex items-center justify-between">
+                <div className=" items-center justify-between flex-col sm:flex-row hidden sm:flex">
                   <h5>{product.calories} Calories</h5>
                   <button
                   className=" bg-orange-500 p-1 rounded-md text-white"

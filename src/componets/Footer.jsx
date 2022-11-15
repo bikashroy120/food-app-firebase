@@ -9,10 +9,10 @@ import { MdLocationPin, MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className=" bg-slate-500  py-5">
-      <div className="flex container items-start justify-between gap-10 p-5">
-        <div className="flex-1">
-          <Link to="/" className=" flex items-center gap-2">
+    <div className=" bg-slate-500 mt-14 px-4 md:mt-20 md:px-16 w-full  py-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 " >
+        <div className="">
+          <Link to="/" className=" flex items-center gap-2 mb-3">
             <img src={logo} className="w-8 object-cover" alt="" />
             <p className=" text-xl font-bold">city</p>
           </Link>
@@ -21,8 +21,8 @@ const Footer = () => {
               repellat nihil illo atque debitis.
             </p>
         </div>
-        <div className="flex-1 flex flex-col">
-        <div className="fhead">
+        <div className=" flex flex-col">
+            <div className="fhead mb-3">
               <h4>CONTACT US</h4>
             </div>
           <ul>
@@ -41,45 +41,30 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="flex-1">
+        <div className="">
           <div className="fsingle">
-            <div className="fhead">
+            <div className="fhead mb-3">
               <h4>CONTACT US</h4>
             </div>
             <div className={`fcontent`}>
               <ul className="">
                 <li>
-                  <a>
-                    <span>
-                      <MdLocationPin />{" "}
-                    </span>{" "}
                     Chardike Limited, Floor 11 (Lift 10), 163-164, Sonargaon
                     Road, Hatirpool, Dhaka 1205
-                  </a>
                 </li>
                 <li>
-                  <a>
-                    <span>
-                      <MdEmail />
-                    </span>{" "}
                     Email: support@chardike.com
-                  </a>
                 </li>
                 <li>
-                  <a>
-                    <span>
-                      <FaPhoneAlt />
-                    </span>{" "}
                     Support: 01790-270066
-                  </a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="flex-1">
+        <div className="">
           <div className="fsingle">
-            <div className="fhead">
+            <div className="fhead mb-3">
               <h4>Download Our App</h4>
             </div>
             <div className="fcontent">
